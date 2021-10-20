@@ -5,10 +5,13 @@
   "repository": "https://github.com/Hzhxi9/utils.git",
   "author": "huangzx <huangzhixi@youxin.cloud>",
   "license": "MIT",
-  "scripts":{
+  "scripts": {
     "test": "jest"
   },
   "devDependencies": {
+    "@babel/core": "^7.15.8",
+    "@babel/preset-env": "^7.15.8",
+    "babel-jest": "^27.3.1",
     "jest": "^27.3.0"
   }
 }

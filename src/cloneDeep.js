@@ -198,10 +198,15 @@ function cloneRegExp(target) {
  * @param {*} target
  */
 function cloneFunction(func) {
+  /**函数体正则 */
   const bodyReg = /(?<={)(.|\n)+(?=})/m;
+  /**参数正则 */
   const paramReg = /(?<=\().+(?=\)\s+{)/;
+  /**函数字符串 */
   const funcString = func.toString();
+  /**箭头函数没有prototype */
   if (func.prototype) {
+    /**普通函数 */
     const param = paramReg.exec(funcString);
     const body = bodyReg.exec(funcString);
     if (body) {
@@ -215,6 +220,7 @@ function cloneFunction(func) {
       return null;
     }
   } else {
+    /**箭头函数 */
     return eval(funcString);
   }
 }
