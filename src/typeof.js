@@ -1,8 +1,15 @@
- /**
-  * 检查数据类型
-  * @param {*} target 
-  * @returns {string} 
-  */
- const check = target => Object.prototype.toString(target).slice(8, -1).toLowerCase()
+/**
+ * 检查数据类型
+ * @param {*} target
+ * @returns {string}
+ */
+const check = (target) =>
+  Object.prototype.toString.call(target).slice(8, -1).toLowerCase();
 
- export default check
+const set = new Set();
+set.add('ConardLi');
+set.add('code秘密花园');
+
+console.log(check(set), '===');
+
+module.exports = check;
