@@ -6,4 +6,25 @@
 const check = (target) =>
   Object.prototype.toString.call(target).slice(8, -1).toLowerCase();
 
-module.exports = check;
+/**
+ * 判断不为undefined以及null
+ * @param {*} target
+ * @returns {boolean}
+ */
+const isDef = (target) => target !== undefined && target !== null;
+
+/**
+ * 判断是否为promise对象
+ * @param {*} target
+ * @returns {boolean}
+ */
+const isPromise = (target) =>
+  isDef(target) &&
+  typeof target.then === 'function' &&
+  typeof target.catch === 'function';
+
+module.exports = {
+  check,
+  isDef,
+  isPromise
+};

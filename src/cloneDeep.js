@@ -3,7 +3,7 @@
  */
 
 const forEach = require('./forEach');
-const check = require('./typeof');
+const { check } = require('./typeof');
 
 /**
  * 版本一, 拷贝数组以及对象

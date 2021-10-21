@@ -109,8 +109,5 @@ test('深拷贝最终版本', () => {
       return a + b;
     },
   };
-
-  console.log(deepCopyFun.cloneDeep(target))
-
   // expect(deepCopyFun.cloneDeep(target)).toEqual(target);
 });

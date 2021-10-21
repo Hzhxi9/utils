@@ -5,7 +5,7 @@
  * @param {*} fn
  * @returns
  */
- function cached(fn) {
+ export default function cached(fn) {
   const cache = Object.create(null);
   return function (str) {
     const hit = cache[str];
