@@ -33,5 +33,6 @@ const isPromise = (target) =>
 module.exports = {
   check,
   isDef,
+  isObject,
   isPromise,
 };
