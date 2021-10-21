@@ -14,6 +14,13 @@ const check = (target) =>
 const isDef = (target) => target !== undefined && target !== null;
 
 /**
+ * 判断是否为对象
+ * @param {*} target
+ * @returns
+ */
+const isObject = (target) => target !== null && typeof target === 'object';
+
+/**
  * 判断是否为promise对象
  * @param {*} target
  * @returns {boolean}
@@ -26,5 +33,5 @@ const isPromise = (target) =>
 module.exports = {
   check,
   isDef,
-  isPromise
+  isPromise,
 };
