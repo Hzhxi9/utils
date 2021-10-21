@@ -11,5 +11,5 @@ test('use isPromise', () => {
       reject('error')
     });
   };
-  expect(p).toBe(true);
+  expect(isPromise(p())).toBe(true);
 });
