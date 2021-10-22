@@ -2,7 +2,7 @@
  * 实现对象的深拷贝
  */
 
-const forEach = require('./forEach');
+const { forEach } = require('./forEach');
 const { check } = require('./typeof');
 
 /**
