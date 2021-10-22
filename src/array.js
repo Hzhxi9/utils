@@ -88,7 +88,77 @@ function every(array, callback) {
   while (len > k) {
     const result = callback(target[k], k, target);
     if (!result) return false;
-    k++
+    k++;
   }
   return true;
+}
+
+/**
+ * 数组 filter
+ * @param {*} array
+ * @param {*} callback
+ */
+function filter(array, callback) {
+  if (!isArray(array)) debug(array);
+
+  const target = Object(array),
+    len = target.length >>> 0,
+    result = [];
+
+  let k = 0;
+
+  while (len > k) {
+    if (callback(target[k], k, target)) result.push(target[k]);
+    k++;
+  }
+  return result;
+}
+
+/**
+ * 数组 find
+ * @param {*} array
+ * @param {*} callback
+ */
+function find(array, callback) {
+  if (!isArray(array)) debug(array);
+
+  const target = Object(array),
+    len = target.length >>> 0;
+
+  let k = 0;
+
+  while (len > k) {
+    if (callback(target[k], k, target)) return target[k];
+    k++;
+  }
+  return void 0;
+}
+
+/**
+ * 数组 reduce
+ * @param {*} array
+ * @param {*} callback
+ */
+function reduce(array, callback, init) {
+  if (!isArray(array)) debug(array);
+
+  const target = Object(array),
+    len = target.length >>> 0;
+
+  let k = 0,
+    acc = [];
+
+  if (arguments.length > 2) {
+    acc = init;
+  } else {
+    while (k < len && !(k in target)) k++;
+    if (k > len) throw new TypeError('reduce is no empty');
+    acc = target[k++];
+  }
+
+  while (k < len) {
+    acc = callback(acc, target[k], k, target);
+    k++;
+  }
+  return acc;
 }
