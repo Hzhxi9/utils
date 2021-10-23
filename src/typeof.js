@@ -40,6 +40,21 @@ const isPlainObject = (target) => {
 };
 
 /**
+ * 判断是否为URLSearchParams
+ * @param {*} target
+ * @returns
+ */
+const isURLSearchParams = (target) =>
+  !isUndefined(URLSearchParams) && target instanceof URLSearchParams;
+
+/**
+ *
+ * @param {*} target
+ * @returns
+ */
+const isDate = (target) => toStringProp.call(target) === '[object Date]';
+
+/**
  * 判断是否为promise对象
  * @param {*} target
  * @returns {boolean}
@@ -52,8 +67,10 @@ const isPromise = (target) =>
 module.exports = {
   check,
   isDef,
+  isDate,
   isUndefined,
   isObject,
   isPromise,
   isPlainObject,
+  isURLSearchParams,
 };
