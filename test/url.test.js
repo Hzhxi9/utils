@@ -1,8 +1,8 @@
-import { buildURL } from '../src/url';
+import { buildURL, parserParams } from '../src/url';
 
 describe('test buildURL', () => {
   const url = 'https://www.baidu.com/api';
-  
+
   test('common', () => {
     expect(buildURL(url, { a: 1, b: 2 })).toBe(url + '?a=1&b=2');
   });
@@ -20,8 +20,9 @@ describe('test buildURL', () => {
   });
 
   test('Date', () => {
+    const date = new Date()
     expect(buildURL(url, { date: new Date() })).toBe(
-      url + '?date=' + (new Date()).toISOString()
+      url + '?date=' + date.toISOString()
     );
   });
 
@@ -34,6 +35,17 @@ describe('test buildURL', () => {
   });
 
   test('has', () => {
-      expect(buildURL(url+'?foo=bar', {foo: 'baz'})).toBe(url + '?foo=bar&foo=baz')
-  })
+    expect(buildURL(url + '?foo=bar', { foo: 'baz' })).toBe(
+      url + '?foo=bar&foo=baz'
+    );
+  });
+});
+
+describe('parserParams', () => {
+  test('parserParams', () => {
+    expect(parserParams('https://s.weibo.com/weibo?q=%23%E5%8C%BB%E5%AD%A6%E7%94%9F%E5%90%83%E7%81%AB%E9%94%85%E5%90%8E%E7%BB%99%E8%80%81%E6%9D%BF%E7%95%99%E8%A8%80%E6%A3%80%E6%9F%A5%E8%BA%AB%E4%BD%93%23&Refer=top&Refer=bottom')).toStrictEqual({
+      q: '#医学生吃火锅后给老板留言检查身体#',
+      Refer: ['top', 'bottom']
+    });
+  });
 });

@@ -99,3 +99,40 @@ export function buildURL(url, params, paramsSerializer) {
 
   return url;
 }
+
+/**
+ * 解析URL参数
+ * @param {string} url
+ */
+export function parserParams(url) {
+  /**匹配?之后的字符串 */
+  const reg = /.+\?(.+)/;
+
+  /**获取匹配第一个捕获的组 */
+  const paramsString = reg.test(url) && reg.exec(url)[1];
+
+  /**分割& */
+  const paramsArray = paramsString && paramsString.split('&');
+
+  if (paramsArray && paramsArray.length) {
+    const params = {};
+    paramsArray.forEach((param) => {
+      if (/=/.test(param)) {
+        let [key, value] = param.split('=');
+
+        /**解码 */
+        value = decodeURIComponent(value);
+
+        /**处理纯数字 */
+        value = /\d+/.test(value) ? parseFloat(value) : value;
+
+        if (params.hasOwnProperty(key))
+          params[key] = [].concat(params[key], value) /**存在key, 处理成数组 */;
+        else params[key] = value /**不存在, 直接赋值 */;
+      } else {
+        params[param] = true;
+      }
+    });
+    return params;
+  }
+}
