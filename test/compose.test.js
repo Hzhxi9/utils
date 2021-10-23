@@ -1,16 +1,9 @@
-import compose from '../src/compose';
+import { compose } from '../src/compose';
 
 test('use compose', () => {
-  const fn1 = function () {
-    return '111';
-  };
-  const fn2 = function () {
-    return '222';
-  };
-  const fn3 = function () {
-    return '333';
-  };
+  const fn1 = (x, y) => x + y;
+  const fn2 = (x) => x * x;
+  const fn3 = (x) => (!x ? x : 1 / x);
   /**TODO */
-  console.log(compose(fn1, fn2, fn3));
-  //   expect(compose(fn1, fn2, fn3)()).toEqual('111222333');
+  expect(compose(fn3, fn2, fn1)(1, 2)).toBe(1 / 9);
 });
