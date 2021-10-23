@@ -8,7 +8,7 @@
  *  - 动画场景: 避免短时间内多次触发动画引起性能问题
  *  - 滚动事件: 通过事件节流来降低事件调用频率
  * @param {*} fn
- * @param {*} delay
+ * @param {number} delay
  */
 export default function throttle(fn, delay) {
   /**时间戳版本 */
