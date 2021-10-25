@@ -1,6 +1,6 @@
 import EventEmitter from '../src/emit';
 
-test('use EventEmitter', () => {
+test.skip('use EventEmitter', () => {
   const bus = new EventEmitter();
   const fn1 = function (name, age) {
     console.log(`${name} ${age}`)
