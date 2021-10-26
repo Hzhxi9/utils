@@ -2,7 +2,7 @@ import { factorial, tailFactorials } from '../src/fib';
 
 test('斐波那契数列', () => {
   console.time('start');
-  //   expect(fib(10)).toBe(3628800);
+  //   expect(factorial(10)).toBe(3628800);
   console.log(factorial(10));
   console.timeEnd('start');
 });
