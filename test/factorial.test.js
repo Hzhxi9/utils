@@ -1,4 +1,4 @@
-import { factorial, tailFactorials } from '../src/fib';
+import { factorial, tailFactorials } from '../src/factorial';
 
 test('斐波那契数列', () => {
   console.time('start');
