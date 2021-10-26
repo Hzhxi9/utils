@@ -24,7 +24,7 @@
  * @param {*} n
  * @returns
  */
-export function tailFactorial(n) {
+export function factorial(n) {
   if (n === 1) return 1;
   return n * fib(n - 1);
 }
