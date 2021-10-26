@@ -21,4 +21,29 @@ const memorize = function (fn) {
      */
     return cache[_args] || (cache[_args] = fn.apply(fn, args));
   };
-}
+};
+
+/**
+ * 记忆对象
+ */
+const memoization = (fn) =>
+  new Proxy(fn, {
+    cache: new Map(),
+    apply(target, thisArgs, argsList) {
+      const cacheKey = argsList.toString();
+      if (!this.cache.has(cacheKey)) {
+        this.cache.set(cacheKey, target.apply(thisArgs, argsList));
+      }
+      return this.cache.get(cacheKey);
+    },
+  });
+
+
+/**
+ * example
+ */
+const fibonacci = (n) => (n <= 1 ? 1 : fibonacci(n - 1) + fibonacci(n - 2));
+const memoizedFibonacci = memoization(fibonacci);
+
+for (let i = 0; i < 100; i++) fibonacci(30); // ~5000ms
+for (let i = 0; i < 100; i++) memoizedFibonacci(30);
