@@ -6,13 +6,7 @@ const Typeof = require('./typeof');
  * @returns
  */
 function encode(url) {
-  return encodeURIComponent(url)
-    .replace(/%3A/gi, ':')
-    .replace(/%24/gi, '$')
-    .replace(/%2c/gi, ',')
-    .replace(/%20/gi, '+')
-    .replace(/%5B/gi, '[')
-    .replace(/%5D/gi, ']');
+  return encodeURIComponent(url).replace(/%3A/gi, ':').replace(/%24/gi, '$').replace(/%2c/gi, ',').replace(/%20/gi, '+').replace(/%5B/gi, '[').replace(/%5D/gi, ']');
 }
 
 /**
@@ -63,7 +57,7 @@ export function buildURL(url, params, paramsSerializer) {
 
     /**遍历params所有键值对 */
     const keys = Object.keys(params);
-    keys.forEach((key) => {
+    keys.forEach(key => {
       let value = params[key];
       /**如果有undefined || null, 不进行处理, 直接跳出循环 */
       if (value === null || typeof value === 'undefined') return;
@@ -79,7 +73,7 @@ export function buildURL(url, params, paramsSerializer) {
         values = [value];
       }
 
-      values.forEach((value) => {
+      values.forEach(value => {
         if (Typeof.isDate(value)) value = value.toISOString();
         else if (Typeof.isObject(value)) value = JSON.stringify(value);
         parts.push(`${encode(key)}=${encode(value)}`);
@@ -101,6 +95,35 @@ export function buildURL(url, params, paramsSerializer) {
 }
 
 /**
+ *  拼接URL
+ *  @param {string[]} 
+ */
+export const urlJoin = (...args) =>
+  args
+    .join('/')
+    .replace(/[\/]+/g, '/')
+    .replace(/^(.+):\//, '$1://')
+    .replace(/^file:/, 'file:/')
+    .replace(/\/(\?|&|#[^!])/g, '$1')
+    .replace(/\?/g, '&')
+    .replace('&', '?');
+
+/**
+ * 解析URL参数
+ * @param {string} url
+ */
+const urlReg = /([^?=&]+)(=([^&]*))/g;
+export const getURLParameters = url => (url.match(urlReg) || []).reduce((acc, cur) => ((acc[cur.slice(0, cur.indexOf('='))] = cur.slice(cur.indexOf('=') + 1)), acc), {});
+
+/**
+ * 获取基础url
+ * @param {*} url
+ * @returns
+ */
+const baseUrlReg = /[?#].*$/;
+export const getBaseUrl = url => url.replace(baseUrlReg, '');
+
+/**
  * 解析URL参数
  * @param {string} url
  */
@@ -116,7 +139,7 @@ export function parserParams(url) {
 
   if (paramsArray && paramsArray.length) {
     const params = {};
-    paramsArray.forEach((param) => {
+    paramsArray.forEach(param => {
       if (/=/.test(param)) {
         let [key, value] = param.split('=');
 
@@ -126,8 +149,7 @@ export function parserParams(url) {
         /**处理纯数字 */
         value = /\d+/.test(value) ? parseFloat(value) : value;
 
-        if (params.hasOwnProperty(key))
-          params[key] = [].concat(params[key], value) /**存在key, 处理成数组 */;
+        if (params.hasOwnProperty(key)) params[key] = [].concat(params[key], value) /**存在key, 处理成数组 */;
         else params[key] = value /**不存在, 直接赋值 */;
       } else {
         params[param] = true;

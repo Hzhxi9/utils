@@ -1,4 +1,5 @@
 /**
+ * TODO
  * 在目标对象寻找连续点符号的key属性
  * @param {*} from
  * @param  {...any} selector
