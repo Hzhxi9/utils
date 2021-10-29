@@ -1,6 +1,6 @@
 import { buildURL, parserParams, getURLParameters, getBaseUrl, urlJoin } from '../src/url';
 
-describe('test buildURL', () => {
+describe.skip('test buildURL', () => {
   const url = 'https://www.baidu.com/api';
 
   test('common', () => {
