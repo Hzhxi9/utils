@@ -13,6 +13,10 @@ function changeStr(str) {
 /**
  *  1. './' 表示操作对象为当前目录
  *  2. require.context是webpack的一个API，所以，需要基于webpack环境才可以使用。
+ *  3. require.context(directory,useSubdirectories,regExp)
+ *     @param directory 说明需要检索的目录
+ *     @param useSubdirectories 是否检索子目录
+ *     @param regExp 匹配文件的正则表达式, 一般是文件名
  */
 const requireComponent = require.context('./', false, /\.vue$/);
 
